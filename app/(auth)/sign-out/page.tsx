@@ -1,16 +1,14 @@
-'use client';
+"use client";
 
-import { useEffect } from 'react';
-import { useRouter } from 'next/navigation';
-import { useAuth } from '@clerk/nextjs';
+import { useEffect } from "react";
+import { useClerk } from "@clerk/nextjs";
 
-export default function Page() {
+export default function AutoLogout() {
+  const { signOut } = useClerk();
 
-  const { isSignedIn } = useAuth();
-  console.log(isSignedIn) 
-  return (
-    <main className="min-h-screen flex items-center justify-center">
-      this {isSignedIn}
-    </main>
-  );
+  useEffect(() => {
+    signOut({ redirectUrl: "/sign-in" });
+  }, [signOut]);
+
+  return null; 
 }
